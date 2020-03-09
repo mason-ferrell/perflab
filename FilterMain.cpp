@@ -107,48 +107,48 @@ applyFilter(class Filter *filter, cs1300bmp *input, cs1300bmp *output)
 
     for(int row = 1; row < (input->height) - 1 ; row = row + 1) {
         for(int col = 1; col < (input->width) - 1; col = col + 1) {
-            output -> color[0][row][col] = 0;
-            output -> color[1][row][col] = 0;
-            output -> color[2][row][col] = 0;
+            output -> color[row][col][0] = 0;
+            output -> color[row][col][1] = 0;
+            output -> color[row][col][2] = 0;
             
             for (int i = 0; i < s; i++) {
                 for (int j = 0; j < s; j++) {	
-                    output -> color[0][row][col]
-                    = output -> color[0][row][col] + (input -> color[0][row + i - 1][col + j - 1] * filter -> get(i, j) );
+                    output -> color[row][col][0]
+                    = output -> color[row][col][0] + (input -> color[row + i - 1][col + j - 1][0] * filter -> get(i, j) );
                     
-                    output -> color[1][row][col]
-                    = output -> color[1][row][col] + (input -> color[1][row + i - 1][col + j - 1] * filter -> get(i, j) );
+                    output -> color[row][col][1]
+                    = output -> color[row][col][1] + (input -> color[row + i - 1][col + j - 1][1] * filter -> get(i, j) );
                     
-                    output -> color[2][row][col]
-                    = output -> color[2][row][col] + (input -> color[2][row + i - 1][col + j - 1] * filter -> get(i, j) );
+                    output -> color[row][col][2]
+                    = output -> color[row][col][2] + (input -> color[row + i - 1][col + j - 1][2] * filter -> get(i, j) );
                 }
             }
-            output -> color[0][row][col] = 
-            output -> color[0][row][col] / f;
+            output -> color[row][col][0] = 
+            output -> color[row][col][0] / f;
             
-            output -> color[1][row][col] = 
-            output -> color[1][row][col] / f;
+            output -> color[row][col][1] = 
+            output -> color[row][col][1] / f;
             
-            output -> color[2][row][col] = 
-            output -> color[2][row][col] / f;
+            output -> color[row][col][2] = 
+            output -> color[row][col][2] / f;
             
-            if ( output -> color[0][row][col]  < 0 ) {
-                output -> color[0][row][col] = 0;
+            if ( output -> color[row][col][0]  < 0 ) {
+                output -> color[row][col][0] = 0;
             }
-            if ( output -> color[0][row][col]  > 255 ) { 
-                output -> color[0][row][col] = 255;
+            if ( output -> color[row][col][0]  > 255 ) { 
+                output -> color[row][col][0] = 255;
             }
-            if ( output -> color[1][row][col]  < 0 ) {
-                output -> color[1][row][col] = 0;
+            if ( output -> color[row][col][1]  < 0 ) {
+                output -> color[row][col][1] = 0;
             }
-            if ( output -> color[1][row][col]  > 255 ) { 
-                output -> color[1][row][col] = 255;
+            if ( output -> color[row][col][1]  > 255 ) { 
+                output -> color[row][col][1] = 255;
             }
-            if ( output -> color[2][row][col]  < 0 ) {
-                output -> color[2][row][col] = 0;
+            if ( output -> color[row][col][2]  < 0 ) {
+                output -> color[row][col][2] = 0;
             }
-            if ( output -> color[2][row][col]  > 255 ) { 
-                output -> color[2][row][col] = 255;
+            if ( output -> color[row][col][2]  > 255 ) { 
+                output -> color[row][col][2] = 255;
             }
         }
     }
