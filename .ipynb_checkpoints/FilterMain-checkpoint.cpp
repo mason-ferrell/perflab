@@ -103,6 +103,7 @@ applyFilter(class Filter *filter, cs1300bmp *input, cs1300bmp *output)
     output -> width = input -> width;
     output -> height = input -> height;
     int s = filter->getSize();
+    int f = filter->getDivisor();
 
     for(int row = 1; row < (input->height) - 1 ; row = row + 1) {
         for(int col = 1; col < (input->width) - 1; col = col + 1) {
@@ -123,13 +124,13 @@ applyFilter(class Filter *filter, cs1300bmp *input, cs1300bmp *output)
                 }
             }
             output -> color[0][row][col] = 
-            output -> color[0][row][col] / filter -> getDivisor();
+            output -> color[0][row][col] / f;
             
             output -> color[1][row][col] = 
-            output -> color[1][row][col] / filter -> getDivisor();
+            output -> color[1][row][col] / f;
             
             output -> color[2][row][col] = 
-            output -> color[2][row][col] / filter -> getDivisor();
+            output -> color[2][row][col] / f;
             
             if ( output -> color[0][row][col]  < 0 ) {
                 output -> color[0][row][col] = 0;
