@@ -107,49 +107,45 @@ applyFilter(class Filter *filter, cs1300bmp *input, cs1300bmp *output)
 
     for(int row = 1; row < (input->height) - 1 ; row = row + 1) {
         for(int col = 1; col < (input->width) - 1; col = col + 1) {
-            output -> color[row][col][0] = 0;
-            output -> color[row][col][1] = 0;
-            output -> color[row][col][2] = 0;
+            int tempRed = 0;
+            int tempGreen = 0;
+            int tempBlue = 0;
             
             for (int i = 0; i < s; i++) {
                 for (int j = 0; j < s; j++) {	
-                    output -> color[row][col][0]
-                    = output -> color[row][col][0] + (input -> color[row + i - 1][col + j - 1][0] * filter -> get(i, j) );
-                    
-                    output -> color[row][col][1]
-                    = output -> color[row][col][1] + (input -> color[row + i - 1][col + j - 1][1] * filter -> get(i, j) );
-                    
-                    output -> color[row][col][2]
-                    = output -> color[row][col][2] + (input -> color[row + i - 1][col + j - 1][2] * filter -> get(i, j) );
+                    tempRed += (input -> color[row + i - 1][col + j - 1][0] * filter -> get(i, j) );
+                    tempGreen += (input -> color[row + i - 1][col + j - 1][1] * filter -> get(i, j) );
+                    tempBlue += (input -> color[row + i - 1][col + j - 1][2] * filter -> get(i, j) );
                 }
             }
-            output -> color[row][col][0] = 
-            output -> color[row][col][0] / f;
+            tempRed /= f;
             
-            output -> color[row][col][1] = 
-            output -> color[row][col][1] / f;
+            tempGreen /= f;
             
-            output -> color[row][col][2] = 
-            output -> color[row][col][2] / f;
+            tempBlue /= f;
             
-            if ( output -> color[row][col][0]  < 0 ) {
-                output -> color[row][col][0] = 0;
+            if ( tempRed  < 0 ) {
+                tempRed = 0;
             }
-            if ( output -> color[row][col][0]  > 255 ) { 
-                output -> color[row][col][0] = 255;
+            if ( tempRed  > 255 ) { 
+                tempRed = 255;
             }
-            if ( output -> color[row][col][1]  < 0 ) {
-                output -> color[row][col][1] = 0;
+            if ( tempGreen  < 0 ) {
+                tempGreen = 0;
             }
-            if ( output -> color[row][col][1]  > 255 ) { 
-                output -> color[row][col][1] = 255;
+            if ( tempGreen  > 255 ) { 
+                tempGreen = 255;
             }
-            if ( output -> color[row][col][2]  < 0 ) {
-                output -> color[row][col][2] = 0;
+            if ( tempBlue  < 0 ) {
+                tempBlue = 0;
             }
-            if ( output -> color[row][col][2]  > 255 ) { 
-                output -> color[row][col][2] = 255;
+            if ( tempBlue  > 255 ) { 
+                tempBlue = 255;
             }
+            
+            output -> color[row][col][COLOR_RED] = tempRed;
+            output -> color[row][col][COLOR_GREEN] = tempGreen;
+            output -> color[row][col][COLOR_BLUE] = tempBlue;
         }
     }
 
