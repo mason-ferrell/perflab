@@ -116,7 +116,7 @@ applyFilter(class Filter *filter, cs1300bmp *input, cs1300bmp *output)
             int tempBlue = 0;
             
             for (int i = 0; i < s; i++) {
-                for (int j = 0; j < s; j++) {	
+                for (int j = 0; j < s; j++) {
                     tempRed += (input -> color[row + i - 1][col + j - 1][0] * filter -> get(i, j) );
                     tempGreen += (input -> color[row + i - 1][col + j - 1][1] * filter -> get(i, j) );
                     tempBlue += (input -> color[row + i - 1][col + j - 1][2] * filter -> get(i, j) );
