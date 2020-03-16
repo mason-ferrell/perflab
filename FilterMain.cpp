@@ -119,34 +119,34 @@ applyFilter(class Filter *filter, cs1300bmp *input, cs1300bmp *output)
                 tempRed += (input -> color[row - 1][col - 1][0] * filter -> get(0, 0) )
                         + (input -> color[row - 1][col][0] * filter -> get(0, 1) )
                         + (input -> color[row - 1][col + 1][0] * filter -> get(0, 2) );
+            
+                tempRed += (input -> color[row][col - 1][0] * filter -> get(1, 0) )
+                        + (input -> color[row][col][0] * filter -> get(1, 1) )
+                        + (input -> color[row][col + 1][0] * filter -> get(1, 2) );
+            
+                tempRed += (input -> color[row + 1][col - 1][0] * filter -> get(2, 0) )
+                        + (input -> color[row + 1][col][0] * filter -> get(2, 1) )
+                        + (input -> color[row + 1][col + 1][0] * filter -> get(2, 2) );
                 
                 tempGreen += (input -> color[row - 1][col - 1][1] * filter -> get(0, 0) )
                         + (input -> color[row - 1][col][1] * filter -> get(0, 1) )
                         + (input -> color[row - 1][col + 1][1] * filter -> get(0, 2) );
+            
+                tempGreen += (input -> color[row][col - 1][1] * filter -> get(1, 0) )
+                        + (input -> color[row][col][1] * filter -> get(1, 1) )
+                        + (input -> color[row][col + 1][1] * filter -> get(1, 2) );
+            
+                tempGreen += (input -> color[row + 1][col - 1][1] * filter -> get(2, 0) )
+                        + (input -> color[row + 1][col][1] * filter -> get(2, 1) )
+                        + (input -> color[row + 1][col + 1][1] * filter -> get(2, 2) );
                 
                 tempBlue += (input -> color[row - 1][col - 1][2] * filter -> get(0, 0) )
                         + (input -> color[row - 1][col][2] * filter -> get(0, 1) )
                         + (input -> color[row - 1][col + 1][2] * filter -> get(0, 2) );
                 
-                tempRed += (input -> color[row][col - 1][0] * filter -> get(1, 0) )
-                        + (input -> color[row][col][0] * filter -> get(1, 1) )
-                        + (input -> color[row][col + 1][0] * filter -> get(1, 2) );
-                
-                tempGreen += (input -> color[row][col - 1][1] * filter -> get(1, 0) )
-                        + (input -> color[row][col][1] * filter -> get(1, 1) )
-                        + (input -> color[row][col + 1][1] * filter -> get(1, 2) );
-                
                 tempBlue += (input -> color[row][col - 1][2] * filter -> get(1, 0) )
                         + (input -> color[row][col][2] * filter -> get(1, 1) )
                         + (input -> color[row][col + 1][2] * filter -> get(1, 2) );
-                
-                tempRed += (input -> color[row + 1][col - 1][0] * filter -> get(2, 0) )
-                        + (input -> color[row + 1][col][0] * filter -> get(2, 1) )
-                        + (input -> color[row + 1][col + 1][0] * filter -> get(2, 2) );
-                
-                tempGreen += (input -> color[row + 1][col - 1][1] * filter -> get(2, 0) )
-                        + (input -> color[row + 1][col][1] * filter -> get(2, 1) )
-                        + (input -> color[row + 1][col + 1][1] * filter -> get(2, 2) );
                 
                 tempBlue += (input -> color[row + 1][col - 1][2] * filter -> get(2, 0) )
                         + (input -> color[row + 1][col][2] * filter -> get(2, 1) )
