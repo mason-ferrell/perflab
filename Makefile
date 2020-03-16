@@ -6,13 +6,13 @@ CXX	=g++
 ## Use our standard compiler flags for the course...
 ## You can try changing these flags to improve performance.
 ##
-CXXFLAGS= -g -O3 -fno-omit-frame-pointer -Wall
+CXXFLAGS= -g -O3 -fno-omit-frame-pointer -Wall -static
 
 goals: judge
 	@echo "Done"
 
 filter: FilterMain.cpp Filter.cpp cs1300bmp.cc cs1300bmp.h Filter.h rdtsc.h
-	$(CXX) $(CXXFLAGS) -o3 filter FilterMain.cpp Filter.cpp cs1300bmp.cc
+	$(CXX) $(CXXFLAGS) -o filter FilterMain.cpp Filter.cpp cs1300bmp.cc
 
 ##
 ## Parameters for the test run

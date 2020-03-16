@@ -106,22 +106,52 @@ applyFilter(class Filter *filter, cs1300bmp *input, cs1300bmp *output)
 
     output -> width = input -> width;
     output -> height = input -> height;
-    int s = filter->getSize();
-    int f = filter->getDivisor();
+    const short int f = filter->getDivisor();
+    const short int w = input->width;
+    const short int h = input->height;
 
-    for(int row = 1; row < (input->height) - 1 ; row = row + 1) {
-        for(int col = 1; col < (input->width) - 1; col = col + 1) {
+    for(int row = 1; row < h - 1 ; row = row + 1) {
+        for(int col = 1; col < w - 1; col = col + 1) {
             int tempRed = 0;
             int tempGreen = 0;
             int tempBlue = 0;
             
-            for (int i = 0; i < s; i++) {
-                for (int j = 0; j < s; j++) {
-                    tempRed += (input -> color[row + i - 1][col + j - 1][0] * filter -> get(i, j) );
-                    tempGreen += (input -> color[row + i - 1][col + j - 1][1] * filter -> get(i, j) );
-                    tempBlue += (input -> color[row + i - 1][col + j - 1][2] * filter -> get(i, j) );
-                }
-            }
+                tempRed += (input -> color[row - 1][col - 1][0] * filter -> get(0, 0) )
+                        + (input -> color[row - 1][col][0] * filter -> get(0, 1) )
+                        + (input -> color[row - 1][col + 1][0] * filter -> get(0, 2) );
+                
+                tempGreen += (input -> color[row - 1][col - 1][1] * filter -> get(0, 0) )
+                        + (input -> color[row - 1][col][1] * filter -> get(0, 1) )
+                        + (input -> color[row - 1][col + 1][1] * filter -> get(0, 2) );
+                
+                tempBlue += (input -> color[row - 1][col - 1][2] * filter -> get(0, 0) )
+                        + (input -> color[row - 1][col][2] * filter -> get(0, 1) )
+                        + (input -> color[row - 1][col + 1][2] * filter -> get(0, 2) );
+                
+                tempRed += (input -> color[row][col - 1][0] * filter -> get(1, 0) )
+                        + (input -> color[row][col][0] * filter -> get(1, 1) )
+                        + (input -> color[row][col + 1][0] * filter -> get(1, 2) );
+                
+                tempGreen += (input -> color[row][col - 1][1] * filter -> get(1, 0) )
+                        + (input -> color[row][col][1] * filter -> get(1, 1) )
+                        + (input -> color[row][col + 1][1] * filter -> get(1, 2) );
+                
+                tempBlue += (input -> color[row][col - 1][2] * filter -> get(1, 0) )
+                        + (input -> color[row][col][2] * filter -> get(1, 1) )
+                        + (input -> color[row][col + 1][2] * filter -> get(1, 2) );
+                
+                tempRed += (input -> color[row + 1][col - 1][0] * filter -> get(2, 0) )
+                        + (input -> color[row + 1][col][0] * filter -> get(2, 1) )
+                        + (input -> color[row + 1][col + 1][0] * filter -> get(2, 2) );
+                
+                tempGreen += (input -> color[row + 1][col - 1][1] * filter -> get(2, 0) )
+                        + (input -> color[row + 1][col][1] * filter -> get(2, 1) )
+                        + (input -> color[row + 1][col + 1][1] * filter -> get(2, 2) );
+                
+                tempBlue += (input -> color[row + 1][col - 1][2] * filter -> get(2, 0) )
+                        + (input -> color[row + 1][col][2] * filter -> get(2, 1) )
+                        + (input -> color[row + 1][col + 1][2] * filter -> get(2, 2) );
+                
             tempRed /= f;
             
             tempGreen /= f;
